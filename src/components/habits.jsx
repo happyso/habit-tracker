@@ -2,38 +2,16 @@ import React from 'react';
 import Habit from './habit';
 import HabitAddForm from './habitAddForm';
 
-const Habits = (props) => {
-  const handleIncrement = (habit) => {
-    props.onIncrement(habit);
-  };
-
-  const handleDecrement = (habit) => {
-    props.onDecrement(habit);
-  };
-
-  const handleDelete = (habit) => {
-    props.onDelete(habit);
-  };
-
-  const handleAdd = (name) => {
-    props.onAdd(name);
-  };
-
+const Habits = ({ habits, onIncrement, onDecrement, onDelete, onAdd, onReset }) => {
   return (
     <div className="habits">
-      <HabitAddForm onAdd={handleAdd} />
+      <HabitAddForm onAdd={onAdd} />
       <ul>
-        {props.habits.map((habit) => (
-          <Habit
-            key={habit.id}
-            habit={habit}
-            onIncrement={handleIncrement}
-            onDecrement={handleDecrement}
-            onDelete={handleDelete}
-          />
+        {habits.map((habit) => (
+          <Habit key={habit.id} habit={habit} onIncrement={onIncrement} onDecrement={onDecrement} onDelete={onDelete} />
         ))}
       </ul>
-      <button className="habits-reset" onClick={props.onReset}>
+      <button className="habits-reset" onClick={onReset}>
         Reset All
       </button>
     </div>
